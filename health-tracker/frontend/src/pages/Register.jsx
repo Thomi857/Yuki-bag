@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
+import "./register.css";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -26,27 +27,28 @@ function Register() {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+  <div className="register-container">
+    <div className="register-card">
+      <h2>Create Account</h2>
 
       <form onSubmit={handleRegister}>
         <input
           placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
         />
-        <br />
+
         <input
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <br />
+
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
+
         <button type="submit">Register</button>
       </form>
 
@@ -54,7 +56,8 @@ function Register() {
         Already have an account? <Link to="/">Login</Link>
       </p>
     </div>
-  );
+  </div>
+);
 }
 
 export default Register;
