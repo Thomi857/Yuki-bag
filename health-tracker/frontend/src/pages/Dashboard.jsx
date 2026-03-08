@@ -20,8 +20,11 @@ function Dashboard() {
         }
       } catch (err) {
         if (isMounted) {
-          setError(err.response?.data?.message || "Failed to load dashboard");
-          console.error("Dashboard error:", err);
+          const status = err.response?.status;
+          const message = status === 401 
+            ? "Session expired. Please log in again."
+            : err.response?.data?.message || "Failed to load dashboard";
+          setError(message);
         }
       } finally {
         if (isMounted) {
