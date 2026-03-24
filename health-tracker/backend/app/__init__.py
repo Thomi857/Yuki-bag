@@ -16,7 +16,14 @@ def create_app():
     db.init_app(app)
     jwt.init_app(app)
     migrate.init_app(app, db)
-    CORS(app, origins=app.config.get("CORS_ORIGINS", "*"))
+    # CORS(app, origins=app.config.get("CORS_ORIGINS", "*"))
+    # ✅ Replace with this
+    CORS(app,
+         origins=app.config.get("CORS_ORIGINS", "http://localhost:5173"),
+         allow_headers=["Authorization", "Content-Type"],
+         expose_headers=["Authorization"],
+         supports_credentials=True
+    )
 
     @jwt.invalid_token_loader
     def invalid_token_callback(error):
